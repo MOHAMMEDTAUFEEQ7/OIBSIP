@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Temperature Converter</title>
+    <style>
+        body {
+            background-image: url("https://mdbcdn.b-cdn.net/img/new/slides/003.webp");
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+            color: #fff;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .form {
+            background-color: rgba(255, 255, 255, 0.3);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        label,
+        select {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        input[type="submit"] {
+            background-color: #00bcd4;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .output {
+            background-color: rgba(255, 255, 255, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="container">
+            <h1>Temperature Converter</h1>
+            <input type="text" id="inputValue">
+            <select id="scale">
+                <option value="celsius">°C to °F</option>
+                <option value="fahrenheit">°F to °C</option>
+                <option value="kelvin">°C to K</option>
+                <option value="kelvin">K to °C</option>
+                <option value="kelvintoF">K to °F</option>
+                <option value="fahrenheittoK">°F to K</option>
+
+            </select>
+            <button id="convert">Convert</button>
+            <p id="output"></p>
+        </div>
+        <script>
+            const inputValue = document.querySelector("#inputValue");
+            const scale = document.querySelector("#scale");
+            const convert = document.querySelector("#convert");
+            const output = document.querySelector("#output");
+
+            convert.addEventListener("click", function () {
+                const inputNum = parseFloat(inputValue.value);
+
+                if (isNaN(inputNum)) {
+                    output.textContent = "Please enter a valid number.";
+                    inputValue.style.backgroundColor = "red";
+                    return;
+                }
+                inputValue.style.backgroundColor = "white";
+                let result;
+                if (scale.value === "celsius") {
+                    result = (inputNum * 9 / 5) + 32;
+
+                    output.textContent = result;
+                } else if (scale.value === "fahrenheit") {
+                    result = (inputNum - 32) * 5 / 9;
+                    output.textContent = result;
+                } else if (scale.value === "kelvin") {
+                    result = inputNum + 273.15;
+                    output.textContent = result;
+                } else if (scale.value === "kelvin") {
+                    result = inputNum - 273.15;
+                    output.textContent = result;
+                }else if (scale.value === "kelvintoF") {
+                    result = (inputNum.value - 273.15) * (9 / 5) + 32;
+                    output.innerHTML = result;
+                } else if (scale.value === "fahrenheittoK") {
+                    result = (inputNum.value - 32) * (5 / 9) + 273.15;
+                    output.innerHTML = result;
+                }
+
+            });
+
+        </script>
+    </div>
+</body>
+
+</html>
